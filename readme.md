@@ -50,5 +50,5 @@
 
 * Apart from required parameters in the script, this project includes python dependencies which is listed in `requirements.txt` doc.
 * For recreational purpose, after cloning the repo please
-  * 1. install said dependencies using `pip install -r requirements.txt`.
-  * 2. use python to run main.py script.
+  1. install said dependencies using `pip install -r requirements.txt`.
+  2 . use python to run main.py script.
