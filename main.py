@@ -3,14 +3,14 @@ from datetime import datetime
 import datetime
 import requests
 import pandas as pd
+from sqlalchemy.orm import sessionmaker
 import json
 from logging import exception
 from pandas import DataFrame as df
 import sqlite3
+import sqlalchemy
 
-from sqlalchemy import false
-
-DATABASE_LOCATION = "sqlite:///my_played_tracks.db"
+DATABASE_LOCATION = "sqlite:///my_played_tracks.sqlite"
 # create in advance the function to validate data before load : 
 def transform_aka_validation(df):
     # 1. if the df loaded is empty
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     yesterday_unix_timestamp = int(yesterday.timestamp()) * 1000
 
     ## setup auth for GET request
-    TOKEN = "BQB9-TpBlD84EINjk3QO3ZliyxfbWL4ZNJ1lfSuA0XhG4SbzfMCr0sEIp9I3OInbPCBD5PlqOtVfcf2baSfRJAVGURsI7VoVDn-EdzaUZ2YhUHmlw90ROfWYgiNd0lgGC_DWRr_7Z5EA2GZTt6w39WsdjCa3aWb4myRe165h5tyKwoxtcRs1_XcLnvpJjMr9dbJSPRYE" # manually insert token here for auth
+    TOKEN = "BQAiyrKP-RKEd9ERFeEmXuFrAmsexf66x-8AcvnnA5QOe-G0E2xrYLAcmDznBAYRG-i2DcvumLOC4gS1poFpPBxtYieTkQlnV-RvOeZ-gnBF59il7ZefPtsHtpIg39mjbgfl_3mH0Tuj2ftGiRXabfWzz7GavUj1fjFOwEWfwnfXaVFzmmuvJVjsW_w-NAbB0At_C1Fu" # manually insert token here for auth. The token can be generated at https://developer.spotify.com/console/get-recently-played/?limit=&after=&before=
 
     header = {
         "Accept" : "application/json",
@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     # init a db on sqlite & create cursor to work with it
     engine = sqlalchemy.create_engine(DATABASE_LOCATION)
-    conn = sqlite3.connect("my_played_tracks.db")
+    conn = sqlite3.connect("my_played_tracks.sqlite")
     cursor = conn.cursor()
     
     
@@ -115,7 +115,7 @@ if __name__ == "__main__":
         track_name VARCHAR(200),
         artist_name VARCHAR(200),
         timestamp VARCHAR(200),
-        played_date VARCHAR(200
+        played_date VARCHAR(200),
         CONSTRAINT primary_key_constraint PRIMARY KEY (timestamp)
     )
     """
@@ -128,5 +128,4 @@ if __name__ == "__main__":
     except:
         print("Data already exists in db.")
     conn.close()
-        print("job done. closing sqlite connection")
-    
+    print("job done. closing sqlite connection")

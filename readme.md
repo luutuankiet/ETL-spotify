@@ -26,7 +26,7 @@
 
 * In order to validate data on the script itself, the data is stored in a Pandas dataframe. A dictionary is defined coresponding to extracted lists.
 * Call the user-defined validate function `transform_aka_validation(song_df)` which includes :
-  * Validate empty dataframe : the pipeline should raise exception if there are no data extracted. [Pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.empty.html) provide a handy method `df.empty` to check if dataframe is null. 
+  * Validate empty dataframe : the pipeline should raise exception if there are no data extracted. [Pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.empty.html) provide a handy method `df.empty` to check if dataframe is null.
   * Validate unique records : no meaningful analysis can come from duplicated dataset - to prevent this, a simple check for unique Primary Key is used. For this data schema, `timestamp` (UNIX timestamp when a given track is played) is the best candidate.
 
 ### 3. Load data to local database
@@ -35,8 +35,9 @@
   * Setup the connection with (1)db engine [SQLalchemy](https://www.sqlalchemy.org/) and (2) cursor [sqlite3 connection](https://www.tutorialspoint.com/python_data_access/python_sqlite_cursor_object.htm).
   * With the cursor in place, execute sql command to create a table `my_played_tracks` by `cursor.execute(<sql_command>)` method
   * Load data from dataframe to the newly created table via Pandas' `DataFrame.to_sql()` method.
+* After successful load, the local database is created at the project's root folder, which can be accessed with a RDBMS - Dbeaver or example : ![table](https://i.imgur.com/RpVjrWP.png)
 
-## conclusion
+## Conclusion
 
 * This project provides an outline to build a simple ETL script. The script can be manually executed, though an automated scheduler is preferred for nature of data pipelines.
 * Main area of improvement can be easily identified further down the road :
@@ -44,3 +45,8 @@
   * Implement Airflow to orchestrate DAGs (schedule automated jobs) for a much more useful pipeline.
   * Implement analytics tools at the receiving end of pipeline.
   * Various improvements for Transformation step to ensure data integrity in Extraction.
+
+## Extras - steps to recreate the project
+
+* Apart from required parameters in the script, this project includes python dependencies which is listed in `requirements.txt` doc.
+* For recreational purpose, after cloning the repo, please install said dependencies using `pip install -r requirements.txt`.
