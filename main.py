@@ -1,4 +1,6 @@
 # import neccessary modules
+import os
+from dotenv import load_dotenv
 from datetime import datetime
 import datetime
 import requests
@@ -38,7 +40,8 @@ if __name__ == "__main__":
     yesterday_unix_timestamp = int(yesterday.timestamp()) * 1000
 
     ## setup auth for GET request
-    TOKEN = "BQAiyrKP-RKEd9ERFeEmXuFrAmsexf66x-8AcvnnA5QOe-G0E2xrYLAcmDznBAYRG-i2DcvumLOC4gS1poFpPBxtYieTkQlnV-RvOeZ-gnBF59il7ZefPtsHtpIg39mjbgfl_3mH0Tuj2ftGiRXabfWzz7GavUj1fjFOwEWfwnfXaVFzmmuvJVjsW_w-NAbB0At_C1Fu" # manually insert token here for auth. The token can be generated at https://developer.spotify.com/console/get-recently-played/?limit=&after=&before=
+    load_dotenv()
+    TOKEN = os.getenv('PROJECT_API_KEY') # a token is stored as environment variable as a best practice : (1) create .env file in root project folder, and (2) insert the token to file and save : PROJECT_API_KEY = <your token>. The token can be generated at https://developer.spotify.com/console/get-recently-played/?limit=&after=&before=
 
     header = {
         "Accept" : "application/json",
