@@ -43,6 +43,7 @@
 * Main area of improvement can be easily identified further down the road :
   * Automate API token generation to account for token expiration. For now the workaround is a snippet to raise exception respond code != 200.
   * Implement Airflow to orchestrate DAGs (schedule automated jobs) for a much more useful pipeline.
+  * Implement clouds services e.g. hosting db in amazon RDS, use AWS Redshift for datawarehouse, and Dockerize the project.
   * Implement analytics tools at the receiving end of pipeline.
   * Various improvements for Transformation step to ensure data integrity in Extraction.
 
