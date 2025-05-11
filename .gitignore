@@ -1,5 +1,3 @@
-/ETL-spotify.drawio
-/ETL-spotify.drawio:Zone.Identifier
-/main.py
-/venv
-/.env
+.venv
+.env
+__pycache__
